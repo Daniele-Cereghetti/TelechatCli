@@ -1,4 +1,4 @@
-# TelegramCli
+# TelechatCli
 
 ## About that project
 That program hat the goal to create a very simple chat in CLI.
