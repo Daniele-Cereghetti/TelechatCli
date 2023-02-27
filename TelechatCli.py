@@ -1,5 +1,4 @@
 # Minichat cli
-import sys
 import time
 import threading
 import sqlite3
@@ -17,19 +16,16 @@ def welkome(stdscr):
     stdscr.addstr(2,0,"Conferma il tuo username: ")
 
     chars = []
-    exitProg = False
     while True:
         key = stdscr.getkey()
         if key == "\n":
             tmp = ''.join(chars)
             cur.execute(f"SELECT * FROM user WHERE name = '{tmp}'")
             if cur.fetchone() is None:
-                stdscr.addstr(3,0,"Nome non confermato", RED_BLACK)
-                stdscr.addstr(4,0,"Prema qualsiasi pulsante :)", RED_BLACK)
-                exitProg = True
-            else:
-                global username
-                username = tmp
+                cur.execute(f"INSERT INTO user VALUES ('{tmp}')")
+                con.commit()
+            global username
+            username = tmp
             break
         else:
             if key != "\b":
@@ -38,9 +34,7 @@ def welkome(stdscr):
                 i = len(chars)-1
                 if i > 0:
                     chars.pop(i)
-    if exitProg == True:
-        stdscr.getkey()
-        sys.exit()
+
     
 
 # Funzione principale
