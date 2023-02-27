@@ -10,5 +10,9 @@ For runnig this program need some dependencies, run this command:
 pip install curses
 ```
 
+```
+pip install sqlite3
+```
+
 ## Status
 developing
