@@ -7,7 +7,7 @@ This program will be implemented with SSH, this protocol will play the role of a
 ## Attention
 For runnig this program need some dependencies, run this command:
 ```
-pip install curses
+pip install windows-curses
 ```
 
 ```
