@@ -1,8 +1,9 @@
 # Minichat cli
+import sys
 import time
-import curses
 import threading
 import sqlite3
+import curses
 from curses import wrapper
 
 
@@ -13,22 +14,33 @@ def welkome(stdscr):
     RED_BLACK = curses.color_pair(1)
     stdscr.addstr("Benvenuto in questa mini chat ;)", curses.A_STANDOUT)
     stdscr.addstr(1,0,"Attento, non ridimensionare la schermata pf", RED_BLACK)
-    stdscr.addstr(2,0,"Inserisci il tuo username: ")
+    stdscr.addstr(2,0,"Conferma il tuo username: ")
 
     chars = []
+    exitProg = False
     while True:
         key = stdscr.getkey()
         if key == "\n":
             tmp = ''.join(chars)
             cur.execute(f"SELECT * FROM user WHERE name = '{tmp}'")
             if cur.fetchone() is None:
-                cur.execute(f"INSERT INTO user VALUES ('{tmp}')")
-                con.commit()
-            global username
-            username = tmp
+                stdscr.addstr(3,0,"Nome non confermato", RED_BLACK)
+                stdscr.addstr(4,0,"Prema qualsiasi pulsante :)", RED_BLACK)
+                exitProg = True
+            else:
+                global username
+                username = tmp
             break
         else:
-            chars.append(key)
+            if key != "\b":
+                chars.append(key)
+            else:
+                i = len(chars)-1
+                if i > 0:
+                    chars.pop(i)
+    if exitProg == True:
+        stdscr.getkey()
+        sys.exit()
     
 
 # Funzione principale
@@ -45,6 +57,7 @@ def main(stdscr):
     # start threads (deamon muore quando termino programma)
     messThred = threading.Thread(target=threadMessages, args=(messages_win,), daemon=True)
     messThred.start()
+    # funzione lettura input
     threadInputs(inputs_win)
 
 # thread che si occupa di stampare i messaggi
@@ -84,7 +97,12 @@ def threadInputs(win):
                 con.commit()
             chars = []
         else:
-            chars.append(key)
+            if key != "\b":
+                chars.append(key)
+            else:
+                i = len(chars)-1
+                if i >= 0:
+                    chars.pop(i)
         win.addstr(0,0, fix+''.join(chars), curses.A_STANDOUT)
         win.refresh(0,0,rows-1,1,rows-1,cols-1)
 
@@ -95,4 +113,3 @@ cur = con.cursor() or exit("Errore durante la connesione al db")
 
 wrapper(welkome)
 wrapper(main)
-
