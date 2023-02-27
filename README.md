@@ -10,7 +10,7 @@ The software is meant to run on an Ubuntu environment. The version used was 22.0
 ## Installing
 Initially you have to install the dependencies and the program, I created a script that does both of the above actions: run the script with the following command.:
 ```
-./install.sh
+sudo ./install.sh
 ```
 
 If it doesn't work give execution permissions first
