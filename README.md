@@ -33,9 +33,12 @@ If you want to configure ssh server with a key-only login, you can follow [this 
 ## Add a user
 Create the user on the server
 ```
-sudo adduser --disabled-password --ingroup telechat username
+sudo adduser --ingroup telechat username
 ```
-
+Assign a password:
+```
+passwd username
+```
 Create the key on the client
 ```
 ssh-keygen
