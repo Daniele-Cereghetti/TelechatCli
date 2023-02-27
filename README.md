@@ -8,15 +8,25 @@ This program will be implemented with SSH, this protocol will play the role of a
 The software is meant to run on an Ubuntu environment. The version used was 22.04.2
 
 ## Installing
-Initially you have to install the dependencies and the program, I created a script that does both of the above actions: run the script with the following command.:
+Initially you have to install the dependencies and the program:
 ```
-sudo ./install.sh
+sudo apt update
+sudo apt install -y libncurses-dev python3 python3-pip
+```
+Create a application group
+```
+sudo addgroup telechat
+```
+Move the entire repository in root:
+```
+sudo mv TelechatCli /
+```
+Assign the right permission:
+```
+sudo chmod -R 770 /TelechatCli
+sudo chown -R user:telechat /TelechatCli
 ```
 
-If it doesn't work give execution permissions first
-```
-sudo chmod +x install.sh
-```
 ## SSH configuration
 If you want to configure ssh server with a key-only login, you can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server).
 
