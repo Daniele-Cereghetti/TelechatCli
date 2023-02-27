@@ -17,7 +17,7 @@ Create a application group
 ```
 sudo addgroup telechat
 ```
-Move the entire repository in root:
+Clone the repho and move it in root:
 ```
 sudo mv TelechatCli /
 ```
