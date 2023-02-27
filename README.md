@@ -52,5 +52,5 @@ ssh-copy-id username@remote_host
 ## Connection to the application
 For the final user, must to execute that comand for using the chat
 ```
-ssh user@remote_host "python3 /TelegramCli/TelegramCli.py"
+ssh user@remote_host "python3 /TelechatCli/TelechatCli.py"
 ```
