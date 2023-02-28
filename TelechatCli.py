@@ -13,7 +13,7 @@ def welkome(stdscr):
     RED_BLACK = curses.color_pair(1)
     stdscr.addstr("Benvenuto in questa mini chat ;)", curses.A_STANDOUT)
     stdscr.addstr(1,0,"Attento, non ridimensionare la schermata pf", RED_BLACK)
-    stdscr.addstr(2,0,"Conferma il tuo username: ")
+    stdscr.addstr(2,0,"Inserisci il tuo username: ")
 
     chars = []
     while True:
@@ -34,8 +34,6 @@ def welkome(stdscr):
                 i = len(chars)-1
                 if i > 0:
                     chars.pop(i)
-
-    
 
 # Funzione principale
 def main(stdscr):
@@ -84,9 +82,9 @@ def threadInputs(win):
         key = win.getkey()
         if key == "\n":
             tmp = ''.join(chars)
-            if tmp == "exit":
+            if tmp == "exit" or tmp == "quit":
                 exit()
-            else:
+            if tmp != "":
                 cur.execute(f"INSERT INTO message (text, username) VALUES ('{tmp}', '{username}')")
                 con.commit()
             chars = []
@@ -101,7 +99,7 @@ def threadInputs(win):
         win.refresh(0,0,rows-1,1,rows-1,cols-1)
 
 
-DB_FILE_NAME = "hometelegram.db"
+DB_FILE_NAME = "/TelechatCli/hometelegram.db"
 con = sqlite3.connect(DB_FILE_NAME) or exit("File db not found")
 cur = con.cursor() or exit("Errore durante la connesione al db")
 
