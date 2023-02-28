@@ -46,7 +46,7 @@ ssh-copy-id username@remote_host
 ```
 
 ## Connection to the application
-For the final user, must to execute that comand for using the chat, the app will execute at the connection
+For the final user, must to execute that comand for using the chat, the app will be executed at the connection
 ```
 ssh user@remote_host
 ```
