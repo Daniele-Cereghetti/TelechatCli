@@ -11,7 +11,7 @@ The software is meant to run on an Ubuntu environment. The version used was 22.0
 Initially you have to install the dependencies and the program:
 ```
 sudo apt update
-sudo apt install -y libncurses-dev python3 python3-pip
+sudo apt install -y libncurses-dev python3
 ```
 Create a application group
 ```
