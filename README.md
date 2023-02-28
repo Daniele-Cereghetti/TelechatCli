@@ -31,19 +31,15 @@ sudo chown -R user:telechat /TelechatCli
 If you want to configure ssh server with a key-only login, you can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server).
 
 ## Add a user
-Create the user on the server
+Create the user on the server with the script
 ```
-sudo adduser --ingroup telechat username
+sudo ./createUser.sh username
 ```
-Assign a password:
-```
-passwd username
-```
-Create the key on the client
+
+Create the ssh key on the client
 ```
 ssh-keygen
 ```
-
 Copy the public key on the server
 ```
 ssh-copy-id username@remote_host
